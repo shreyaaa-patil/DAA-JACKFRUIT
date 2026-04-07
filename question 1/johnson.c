@@ -43,3 +43,15 @@ bool bellmanFord(int V , int R, struct Edge edges[] , int src , int h[]) {
     return true; // if no negative cycle detected
 
 }
+//adding utlity function to find vertex with minimum distance
+int minDistance (int dist[],bool sptSet[], int V) {
+    int min=INF , min_index;
+    for (int v=0;v<V;v++) {
+        if(sptSet[v]==false && dist[v]<=min){
+            min=dist[v];
+            min_index=v;
+        
+        }
+    }
+    return min_index;
+}
