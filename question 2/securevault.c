@@ -4,22 +4,20 @@
 #define MAX 20
 
 int N;
-int board[MAX];              // board[row] = column
-bool cols[MAX];              // columns used
-bool diag1[2 * MAX];         // (row - col + N)
-bool diag2[2 * MAX];         // (row + col)
-bool blocked[MAX][MAX];      // blocked cells
-
+int board[MAX];
+bool cols[MAX];
+bool diag1[2 * MAX];
+bool diag2[2 * MAX];
+bool blocked[MAX][MAX];
 int solutionCount = 0;
 
-// Function to print a solution
 void printSolution() {
     printf("Solution %d:\n", solutionCount);
     
     for (int i = 0; i < N; i++) {
         for (int j = 0; j < N; j++) {
             if (board[i] == j)
-                printf("V ");   // Vault
+                printf("V ");   //vault
             else
                 printf(". ");
         }
@@ -28,7 +26,7 @@ void printSolution() {
     printf("\n");
 }
 
-// Backtracking function
+//backtracking implementation
 void solve(int row) {
     if (row == N) {
         solutionCount++;
@@ -38,24 +36,24 @@ void solve(int row) {
 
     for (int col = 0; col < N; col++) {
         
-        // Skip blocked cells
+        //skips blocked cells
         if (blocked[row][col])
             continue;
 
-        // Check conflicts
+        //check if there is any conflicts
         if (cols[col] || diag1[row - col + N] || diag2[row + col])
             continue;
 
-        // Place vault
+        //vault position in correct place
         board[row] = col;
         cols[col] = true;
         diag1[row - col + N] = true;
         diag2[row + col] = true;
 
-        // Recur
+        //rec
         solve(row + 1);
 
-        // Backtrack
+        //backtrack
         cols[col] = false;
         diag1[row - col + N] = false;
         diag2[row + col] = false;
@@ -68,7 +66,7 @@ int main() {
     printf("Enter N: ");
     scanf("%d", &N);
 
-    // Initialize arrays
+    //init arrays
     for (int i = 0; i < N; i++) {
         board[i] = -1;
         cols[i] = false;
@@ -83,7 +81,7 @@ int main() {
         for (int j = 0; j < N; j++)
             blocked[i][j] = false;
 
-    // Input blocked cells
+    //input blocked blocked cells
     printf("Enter number of blocked cells: ");
     scanf("%d", &blockedCount);
 
@@ -94,7 +92,7 @@ int main() {
         blocked[r][c] = true;
     }
 
-    // Solve
+    //solve
     solve(0);
 
     printf("Total solutions: %d\n", solutionCount);
