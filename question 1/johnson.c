@@ -55,3 +55,28 @@ int minDistance (int dist[],bool sptSet[], int V) {
     }
     return min_index;
 }
+
+//djikstra's algo to find shortest path 
+void djikstra(int V, int graph[MAX_VERTICES][MAX_VERTICES],int src, int dist[]){ //initialized graph to hold max value at first
+    bool sptSet[MAX_VERTICES]; // to keep track of the vertices going to the shortest path tree set
+    //initially all distances are inf and then reduced to a constant value and sptSet[] is false
+    for(int i=0;i<V;i++) {
+        dist[i]=INF;
+        sptSet[i]=false;
+    }
+dist[src]=0; //distance from source to itself is 0
+//to find shortest path for all the vertices
+for(int count=0;count<V-1;count++) {
+    int u=minDistance(dist,sptSet,V);
+    //if u is -1 then all remaining vertices are unreachable
+    if(u==-1) break;
+    sptSet[u]=true; // this is to add the vertex to the shortest path tree set
+    //updating the dis calue of the adj vertices
+    for(int v=0;v<V;v++) {
+        if(!sptSet[v]&& graph[u][v]!=INF && dist[u]!=INF && dist[u]+graph[u][v]<dist[v]) {
+            dist[v]=dist[u]+graph[u][v];
+        }
+    }
+}
+}
+
