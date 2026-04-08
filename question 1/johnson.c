@@ -14,7 +14,7 @@ struct Edge //using structure to represent a directed edge
 };
 //bellmann ford algo to find potentials
 //use aug matrix to calculate shortest distance from dummy vertex to all , these become the potentials for re-weighting
-bool bellmanFord(int V , int R, struct Edge edges[] , int src , int h[]) {
+bool bellmanFord(int V , int E, struct Edge edges[] , int src , int h[]) {
     //initially we take all the distances from the sources as infinity and then reduce them accordingly
     for(int i=0;i<V;i++) {
         h[i]=INF;
