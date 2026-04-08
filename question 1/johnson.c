@@ -142,6 +142,26 @@ void johnsonAlgorithm(int V,int E, struct Edge edges[]) {
         printf("\n");
     }
 }
+//final driver code:
+int main()
+{
+    //taking the example with 5 vertices andnegative edges
+    int V=5;
+    int E=8;//number of edges
+    struct Edge edges[]={
+        {0, 1, -1}, // negative edge 1
+        {0, 2, 4},
+        {1, 2, 3},
+        {1, 3, 2},
+        {1, 4, 2},
+        {3, 2, 5},
+        {3, 1, 1},
+        {4, 3, -3}  // negative edge 2 , all in all two neg edges
 
+    };
+    johnsonAlgorithm(V,E,edges);
+    return 0;
+
+}
 
  
