@@ -8,7 +8,7 @@ int main() {
 
     // Edge cases
     if (N == 0) {
-        printf("10\n");
+        printf("Not possible\n");
         return 0;
     }
 
