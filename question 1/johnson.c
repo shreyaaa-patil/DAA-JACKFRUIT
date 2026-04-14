@@ -45,9 +45,9 @@ bool bellmanFord(int V , int E, struct Edge edges[] , int src , int h[]) {
 }
 //adding utlity function to find vertex with minimum distance
 int minDistance (int dist[],bool sptSet[], int V) {
-    int min=INF , min_index;
+    int min=INF , min_index=-1;
     for (int v=0;v<V;v++) {
-        if(sptSet[v]==false && dist[v]<=min){
+        if(sptSet[v]==false && dist[v]<min){
             min=dist[v];
             min_index=v;
         
@@ -97,7 +97,7 @@ void johnsonAlgorithm(int V,int E, struct Edge edges[]) {
     }
     //running bellmanford from dummy vertex to get potentials
     int h[MAX_VERTICES]; //to store the potentials
-    if(bellmanFord(augmentedV, augmentedE,augmentedEdges,V,h)){
+    if(!bellmanFord(augmentedV, augmentedE,augmentedEdges,V,h)){
         printf("graph contains a negative cycle . johnson's algp cannot proceed further\n");
         return;
     }
