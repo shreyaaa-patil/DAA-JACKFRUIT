@@ -146,6 +146,7 @@ void johnsonAlgorithm(int V,int E, struct Edge edges[]) {
 int main()
 {
     //taking the example with 5 vertices andnegative edges
+    //the test case 1: graph with negative edges but no negative cycles to test the core functionality of the algorithm
     int V=5;
     int E=8;//number of edges
     struct Edge edges[]={
@@ -159,7 +160,29 @@ int main()
         {4, 3, -3}  // negative edge 2 , all in all two neg edges
 
     };
-    johnsonAlgorithm(V,E,edges);
+    johnsonAlgorithm(V,E,edges); 
+    //testcase 2: graph with negative edges
+    int V2 = 4;
+    int E2 = 5;
+    struct Edge edges2[] = {
+        {0, 1, 1}, 
+        {0, 2, 4}, 
+        {1, 2, 2}, 
+        {2, 3, 2}, 
+        {1, 3, -3} // Negative edge
+    };
+    johnsonAlgorithm(V2, E2, edges2);
+    // testcase 3: graph with a negative cycle to test the detection mechanism of the algorithm
+    // This test case will purposefully trigger the Bellman-Ford negative cycle warning
+    // The cycle 0 -> 1 -> 2 -> 0 has a total weight of 1 - 5 + 2 = -2
+    int V3 = 3;
+    int E3 = 3;
+    struct Edge edges3[] = {
+        {0, 1, 1}, 
+        {1, 2, -5}, 
+        {2, 0, 2} 
+    };
+    johnsonAlgorithm(V3, E3, edges3);
     return 0;
 
 }
