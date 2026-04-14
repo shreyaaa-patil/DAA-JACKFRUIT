@@ -21,7 +21,7 @@ bool bellmanFord(int V , int E, struct Edge edges[] , int src , int h[]) {
     }
     h[src]=0; //distance from source to itself is 0
     //relaxing all edges V-1 times 
-    for(int i=1;i<=V-1;i++) {
+    for(int i=0;i<V-1;i++) {
         for( int j =0;j<E;j++) {
             int u=edges[j].src;
             int v=edges[j].dest;
@@ -98,7 +98,7 @@ void johnsonAlgorithm(int V,int E, struct Edge edges[]) {
     //running bellmanford from dummy vertex to get potentials
     int h[MAX_VERTICES]; //to store the potentials
     if(!bellmanFord(augmentedV, augmentedE,augmentedEdges,V,h)){
-        printf("graph contains a negative cycle . johnson's algp cannot proceed further\n");
+        printf("graph contains a negative cycle . johnson's algo cannot proceed further\n");
         return;
     }
     //reweighting the original edges
@@ -145,20 +145,15 @@ void johnsonAlgorithm(int V,int E, struct Edge edges[]) {
 //final driver code:
 int main()
 {
-    //taking the example with 5 vertices andnegative edges
-    //the test case 1: graph with negative edges but no negative cycles to test the core functionality of the algorithm
-    int V=5;
-    int E=8;//number of edges
+    //testcase 1: simple graph with negative edges but no negative cycles
+    int V=4;
+    int E=5;
     struct Edge edges[]={
-        {0, 1, -1}, // negative edge 1
-        {0, 2, 4},
+        {0, 1, -1},
+        {0, 3, 4},
         {1, 2, 3},
-        {1, 3, 2},
-        {1, 4, 2},
-        {3, 2, 5},
-        {3, 1, 1},
-        {4, 3, -3}  // negative edge 2 , all in all two neg edges
-
+        {2, 3, 2},
+        {1, 3, 2}
     };
     johnsonAlgorithm(V,E,edges); 
     //testcase 2: graph with negative edges
